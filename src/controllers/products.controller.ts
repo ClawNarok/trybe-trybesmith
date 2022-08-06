@@ -8,6 +8,10 @@ const productsControllers = {
     const result = await productsServices.addProduct(data);
     res.status(http.CREATED).json(result);
   },
+  async listAllProducts(_req: Request, res: Response) {
+    const data = await productsServices.listAllProducts();
+    res.json(data);
+  },
 };
 
 export default productsControllers;

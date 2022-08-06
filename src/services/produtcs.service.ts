@@ -13,10 +13,11 @@ const productsServices = {
   },
   async addProduct(data: Product): Promise<AddProduct> {
     const result = await productsModels.addProduct(data);
-    const t = { ...result, ...data };
-    console.log(t);
-    
-    return t;
+    return { ...result, ...data };
+  },
+  async listAllProducts(): Promise<Product[]> {
+    const result = await productsModels.listAllProducts();
+    return result;
   },
 };
 
