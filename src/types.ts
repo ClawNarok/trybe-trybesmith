@@ -19,5 +19,10 @@ export type Orders = Indexable & {
   productsIds: number[],
 };
 
+export type Login = {
+  username: string,
+  password: string,
+};
+
 export type AddProduct = Omit<Product, 'id'>;
 export type AddUser = Omit<User, 'id'>;
