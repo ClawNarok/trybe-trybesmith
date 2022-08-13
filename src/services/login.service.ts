@@ -1,7 +1,7 @@
 import Joi from 'joi';
 import Jwt from 'jsonwebtoken';
 import loginModels from '../models/login.models';
-import { Login } from '../types';
+import { Decode, Login } from '../types';
 import Unauthorized from '../errors/notFound.middleware';
 
 const SECRET = 'secret';
@@ -23,6 +23,14 @@ const loginServices = {
     const { username } = data;
     const token = Jwt.sign({ data: { username } }, SECRET);
     return token;
+  },
+  async readToken(token: string): Promise<Decode> {
+    try {
+      const data = Jwt.verify(token.replace('Bearer ', ''), SECRET) as Decode;
+      return data;
+    } catch (error) {
+      throw new Unauthorized('Invalid token');
+    }
   },
 };
 

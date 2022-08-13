@@ -24,5 +24,9 @@ export type Login = {
   password: string,
 };
 
+export type Decode = {
+  data: Omit<Login, 'password'>,
+};
+
 export type AddProduct = Omit<Product, 'id'>;
 export type AddUser = Omit<User, 'id'>;

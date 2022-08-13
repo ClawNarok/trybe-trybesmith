@@ -11,6 +11,11 @@ const ordersModels = {
     const [result] = await connection.query<RowDataPacket[]>(sql);
     return result as Orders[];
   },
+  async getIdByUsename(username: string): Promise<string> {
+    const sql = 'select u.id from Trybesmith.Users as u where u.username = ?';
+    const [[{ id }]] = await connection.query<RowDataPacket[]>(sql, [username]);
+    return id;
+  },
 };
 
 export default ordersModels;
