@@ -15,8 +15,12 @@ export type User = Indexable & {
 };
 
 export type Orders = Indexable & {
-  userId: number,
+  userId: string,
   productsIds: number[],
+};
+
+export type ProductsIds = {
+  productsIds: number[]
 };
 
 export type Login = {
@@ -30,3 +34,4 @@ export type Decode = {
 
 export type AddProduct = Omit<Product, 'id'>;
 export type AddUser = Omit<User, 'id'>;
+export type AddOrders = Omit<Orders, 'id'>;

@@ -11,9 +11,8 @@ const ordersControllers = {
     const { authorization } = req.headers;
     const { data } = await loginServices.readToken(authorization as string);
     const products = await ordersServices.validateBodyProducts(req.body);
-    console.log(products);
-    await ordersServices.addOrders(data);
-    res.sendStatus(200);
+    const result = await ordersServices.addOrders(data, products);
+    res.status(201).json(result);
   },
 };
 

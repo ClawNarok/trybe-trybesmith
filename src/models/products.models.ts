@@ -14,6 +14,10 @@ const productsModels = {
     const [itens] = await connection.query<RowDataPacket[]>(sql);
     return itens as Product[];
   },
+  async updateOrderId(id: number, orderId: number): Promise<void> {
+    const sql = 'update Trybesmith.Products as p set p.orderId = ? where p.id = ?';
+    await connection.query<ResultSetHeader>(sql, [orderId, id]);
+  },
 };
 
 export default productsModels;

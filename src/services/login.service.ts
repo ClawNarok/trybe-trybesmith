@@ -25,6 +25,7 @@ const loginServices = {
     return token;
   },
   async readToken(token: string): Promise<Decode> {
+    if (!token) throw new Unauthorized('Token not found');
     try {
       const data = Jwt.verify(token.replace('Bearer ', ''), SECRET) as Decode;
       return data;

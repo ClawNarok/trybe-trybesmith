@@ -1,4 +1,4 @@
-import { RowDataPacket } from 'mysql2';
+import { ResultSetHeader, RowDataPacket } from 'mysql2';
 import connection from './connection';
 import { Orders } from '../types';
 
@@ -11,10 +11,15 @@ const ordersModels = {
     const [result] = await connection.query<RowDataPacket[]>(sql);
     return result as Orders[];
   },
-  async getIdByUsename(username: string): Promise<string> {
+  async getIdByUsername(username: string): Promise<string> {
     const sql = 'select u.id from Trybesmith.Users as u where u.username = ?';
     const [[{ id }]] = await connection.query<RowDataPacket[]>(sql, [username]);
     return id;
+  },
+  async addOrder(id: string): Promise<number> {
+    const sql = 'insert into Trybesmith.Orders (userID) values (?)';
+    const [{ insertId }] = await connection.query<ResultSetHeader>(sql, [id]);
+    return insertId;
   },
 };
 

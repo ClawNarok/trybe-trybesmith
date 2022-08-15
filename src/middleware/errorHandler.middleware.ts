@@ -11,7 +11,8 @@ const errorHandlerMiddleware = (
   res: Response,
   _next: NextFunction,
 ) => {
-  if (err.message.includes('length')) {
+  if (err.message.includes('length')
+  || err.message.includes('must')) {
     return res.status(errors.UnprocessableEntity).json({ message: err.message });
   }
   const status = errors[err.name];
